@@ -9,12 +9,12 @@
 <body>
   <div class="gift-wrapper">
     <div class="gift-box">
-      <div class="box-lid"></div>
+      <div class="box-lid" onclick="openGift()"></div>
       <div class="box-body"></div>
       <div class="ribbon-horizontal"></div>
       <div class="ribbon-vertical"></div>
     </div>
-    <div class="poem">
+    <div class="poem" id="poem">
       <p>প্রিয়তমা চাঁদ, তুমি আকাশে উঠলেই যেন আমার জীবনে আলো জ্বলে ওঠে।<br>
       তোমার মধুর মায়াবী আলো আমার হৃদয়কে প্রতিটি মুহূর্তে স্নিগ্ধতায় ভরে দেয়।<br>
       রাতের প্রতিটি নীরব ক্ষণে তোমার স্মৃতি আমাকে আলিঙ্গন করে, আর<br>
@@ -23,5 +23,7 @@
       তোমার স্পর্শে অনির্বচনীয় হয়ে ওঠে।</p>
     </div>
   </div>
+  <audio id="giftAudio" src="1.mp3"></audio>
+  <script src="script.js"></script>
 </body>
 </html>
