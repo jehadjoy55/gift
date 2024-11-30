@@ -3,27 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gift Wrapping Box</title>
-  <link rel="stylesheet" href="style.css">
+  <title>3D Gift Box</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: radial-gradient(circle, #ffe6e6, #ffb3b3, #ff6666);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .banner {
+      background: linear-gradient(45deg, #ff6f61, #ff4e50);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .banner:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .gift-wrapper {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(145deg, #ff4e50, #ff6f61);
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateY(0deg);
+      transition: transform 1s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .gift-box.fade-out {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .box-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .front { transform: rotateY(0deg) translateZ(75px); }
+    .back { transform: rotateY(180deg) translateZ(75px); }
+    .left { transform: rotateY(-90deg) translateZ(75px); }
+    .right { transform: rotateY(90deg) translateZ(75px); }
+    .top { transform: rotateX(90deg) translateZ(75px); }
+    .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+    .poem {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+      color: #333;
+      display: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 <body>
+  <div class="banner" onclick="openGift()">Touch Here to Open the Gift!</div>
+
   <div class="gift-wrapper">
-    <div class="gift-box">
-      <div class="box-lid" onclick="openGift()"></div>
-      <div class="box-body"></div>
-      <div class="ribbon-horizontal"></div>
-      <div class="ribbon-vertical"></div>
+    <div class="gift-box" id="giftBox">
+      <div class="box-face front"></div>
+      <div class="box-face back"></div>
+      <div class="box-face left"></div>
+      <div class="box-face right"></div>
+      <div class="box-face top"></div>
+      <div class="box-face bottom"></div>
     </div>
-    <div class="poem" id="poem">
-      <p>প্রিয়তমা চাঁদ, তুমি আকাশে উঠলেই যেন আমার জীবনে আলো জ্বলে ওঠে।<br>
+  </div>
+
+  <div class="poem" id="poem">
+   <p>প্রিয়তমা চাঁদ, তুমি আকাশে উঠলেই যেন আমার জীবনে আলো জ্বলে ওঠে।<br>
       তোমার মধুর মায়াবী আলো আমার হৃদয়কে প্রতিটি মুহূর্তে স্নিগ্ধতায় ভরে দেয়।<br>
       রাতের প্রতিটি নীরব ক্ষণে তোমার স্মৃতি আমাকে আলিঙ্গন করে, আর<br>
       আমার প্রাণের প্রতিটি স্পন্দনে তুমি প্রতিফলিত হও।<br>
       তুমি যেন আমার জীবনের এক অসীম স্বপ্ন, যে স্বপ্নের প্রতিটি কণা<br>
       তোমার স্পর্শে অনির্বচনীয় হয়ে ওঠে।</p>
-    </div>
   </div>
+
   <audio id="giftAudio" src="1.mp3"></audio>
-  <script src="script.js"></script>
+
+  <script>
+    function openGift() {
+      const giftBox = document.getElementById('giftBox');
+      const poem = document.getElementById('poem');
+      const audio = document.getElementById('giftAudio');
+
+      // Open the gift box with 3D rotation
+      giftBox.style.transform = 'rotateY(720deg)';
+
+      // Fade out the gift box
+      setTimeout(() => {
+        giftBox.classList.add('fade-out');
+      }, 1000);
+
+      // Show the poem
+      setTimeout(() => {
+        poem.style.display = 'block';
+      }, 1500);
+
+      // Play the audio
+      audio.play();
+    }
+  </script>
 </body>
 </html>
