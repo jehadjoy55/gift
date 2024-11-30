@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Gift Box</title>
+  <title>3D Gift Box with Love Rain</title>
   <style>
     body {
       display: flex;
@@ -12,8 +12,10 @@
       flex-direction: column;
       min-height: 100vh;
       margin: 0;
-      background: radial-gradient(circle, #ffe6e6, #ffb3b3, #ff6666);
+      background: radial-gradient(circle, rgba(255, 182, 193, 1), rgba(255, 105, 180, 0.6));
+      overflow: hidden;
       font-family: 'Arial', sans-serif;
+      position: relative;
     }
 
     .banner {
@@ -82,9 +84,20 @@
       display: none;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
+  <canvas id="rainCanvas"></canvas>
   <div class="banner" onclick="openGift()">Touch Here to Open the Gift!</div>
 
   <div class="gift-wrapper">
@@ -99,7 +112,7 @@
   </div>
 
   <div class="poem" id="poem">
-   <p>প্রিয়তমা চাঁদ, তুমি আকাশে উঠলেই যেন আমার জীবনে আলো জ্বলে ওঠে।<br>
+    <p>প্রিয়তমা চাঁদ, তুমি আকাশে উঠলেই যেন আমার জীবনে আলো জ্বলে ওঠে।<br>
       তোমার মধুর মায়াবী আলো আমার হৃদয়কে প্রতিটি মুহূর্তে স্নিগ্ধতায় ভরে দেয়।<br>
       রাতের প্রতিটি নীরব ক্ষণে তোমার স্মৃতি আমাকে আলিঙ্গন করে, আর<br>
       আমার প্রাণের প্রতিটি স্পন্দনে তুমি প্রতিফলিত হও।<br>
@@ -131,6 +144,49 @@
       // Play the audio
       audio.play();
     }
+
+    // Rain effect
+    const canvas = document.getElementById('rainCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let rainDrops = [];
+    const numDrops = 100;
+
+    for (let i = 0; i < numDrops; i++) {
+      rainDrops.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 20 + 10,
+        speed: Math.random() * 2 + 2
+      });
+    }
+
+    function drawRain() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.lineWidth = 2;
+
+      for (let drop of rainDrops) {
+        ctx.beginPath();
+        ctx.moveTo(drop.x, drop.y);
+        ctx.lineTo(drop.x, drop.y + drop.length);
+        ctx.stroke();
+        drop.y += drop.speed;
+
+        if (drop.y > canvas.height) {
+          drop.y = -drop.length;
+          drop.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(drawRain);
+    }
+
+    drawRain();
   </script>
 </body>
 </html>
+
