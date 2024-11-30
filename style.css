@@ -1,0 +1,62 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: Arial, sans-serif;
+}
+
+.gift-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: #ff6f61;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.box-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #ff4e50;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 2;
+}
+
+.box-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: #ff6f61;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ribbon-horizontal, .ribbon-vertical {
+  position: absolute;
+  background: #f7d84b;
+}
+
+.ribbon-horizontal {
+  width: 100%;
+  height: 20px;
+  top: 90px;
+  left: 0;
+  z-index: 3;
+}
+
+.ribbon-vertical {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 90px;
+  z-index: 3;
+}
